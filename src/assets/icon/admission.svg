@@ -1,0 +1,10 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.4633 13.852L13.138 11.3574C12.954 11.16 12.954 10.84 13.138 10.6426L15.4633 8.14804C15.6473 7.95065 15.9456 7.95065 16.1296 8.14804C16.3136 8.34543 16.3136 8.66546 16.1296 8.86284L14.6086 10.4946L21.5288 10.4946C21.7891 10.4946 22 10.7209 22 11C22 11.2791 21.7891 11.5054 21.5288 11.5054L14.6086 11.5054L16.1296 13.1372C16.3136 13.3345 16.3136 13.6546 16.1296 13.852C15.9456 14.0493 15.6473 14.0493 15.4633 13.852Z" fill="#AFAFAF" stroke="#AFAFAF" stroke-width="0.2" stroke-linejoin="round"/>
+<line x1="3.7" y1="5.7" x2="3.7" y2="16.3" stroke="#AFAFAF" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="6.03528" y1="7.5" x2="6.03528" y2="14.5" stroke="#AFAFAF" stroke-linecap="round"/>
+<line x1="8.26086" y1="7.5" x2="8.26086" y2="14.5" stroke="#AFAFAF" stroke-linecap="round"/>
+<line x1="17.3" y1="5.7" x2="2.7" y2="5.7" stroke="#AFAFAF" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="17.3" y1="16.7" x2="2.7" y2="16.7" stroke="#AFAFAF" stroke-width="1.4" stroke-linecap="round"/>
+<line x1="10.5" y1="7.5" x2="10.5" y2="14.5" stroke="#AFAFAF" stroke-linecap="round"/>
+<rect x="4" y="18" width="12" height="1.4" rx="0.7" fill="#AFAFAF"/>
+</svg>

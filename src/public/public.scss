@@ -1,0 +1,63 @@
+.side-cont {
+    position: absolute;
+    left: 0;
+    height: 100vh;
+    transition: 1s;
+}
+
+.content-cont {
+    position: relative;
+    right: 0;
+    transition: 1s;
+    // width: 80% !important;
+}
+
+.close {
+    opacity: 1;
+    animation: 1s cubic-bezier(.25, 1, .30, 1) wipe-out-left both;
+}
+
+@keyframes wipe-out-left {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.MuiOutlinedInput-input {
+    font: inherit;
+    letter-spacing: inherit;
+    color: currentColor;
+    border: 0;
+    box-sizing: content-box;
+    background: none;
+    height: 1.4375em;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    min-width: 0;
+    width: 100%;
+    -webkit-animation-name: mui-auto-fill-cancel;
+    animation-name: mui-auto-fill-cancel;
+    -webkit-animation-duration: 10ms;
+    animation-duration: 10ms;
+    padding: 8.5px 5px !important;
+}
+
+.MuiFormLabel-root {
+    top: -3px !important;
+}
+
+.MuiInputLabel-root.Mui-focused {
+    top: 0 !important;
+    color: cornflowerblue !important;
+}
+
+.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: cornflowerblue !important;
+    border-width: 2px;
+}

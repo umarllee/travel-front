@@ -1,0 +1,31 @@
+.field {
+    position: relative;
+    margin: 0;
+
+    input,
+    .mat-chip-list-wrapper,
+    select,
+    .mat-select {
+        width: 100%;
+        line-height: 39px;
+        height: 38px;
+        padding: 0 10px;
+        box-sizing: border-box;
+        background-color: #fff;
+        font-size: 16px;
+        color: #222;
+        border: 1px solid #FFC7BF;
+        border-radius: 15px;
+
+        &:focus {
+            outline: 0;
+            border: 1px solid #fda395;
+        }
+    }
+}
+
+.field label{
+    font-weight: 500;
+    color: #575757;
+}
+
