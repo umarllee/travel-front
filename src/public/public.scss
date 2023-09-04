@@ -28,36 +28,15 @@
     }
 }
 
-.MuiOutlinedInput-input {
-    font: inherit;
-    letter-spacing: inherit;
-    color: currentColor;
-    border: 0;
-    box-sizing: content-box;
-    background: none;
-    height: 1.4375em;
-    margin: 0;
-    -webkit-tap-highlight-color: transparent;
-    display: block;
-    min-width: 0;
-    width: 100%;
-    -webkit-animation-name: mui-auto-fill-cancel;
-    animation-name: mui-auto-fill-cancel;
-    -webkit-animation-duration: 10ms;
-    animation-duration: 10ms;
-    padding: 8.5px 5px !important;
+
+
+ul {
+    list-style: none;
 }
 
-.MuiFormLabel-root {
-    top: -3px !important;
+li::marker {
+    display: none;
+    opacity: 0;
+
 }
 
-.MuiInputLabel-root.Mui-focused {
-    top: 0 !important;
-    color: cornflowerblue !important;
-}
-
-.Mui-focused .MuiOutlinedInput-notchedOutline {
-    border-color: cornflowerblue !important;
-    border-width: 2px;
-}
