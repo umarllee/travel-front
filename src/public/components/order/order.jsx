@@ -216,7 +216,7 @@ const TableContent = (data) => {
 
     <div className="row m-0">
       <div className="col-lg-12 ">
-        <table>
+        <table className='m-0 mb-1'>
           <thead>
             <tr>
               <th colSpan={4}></th>
