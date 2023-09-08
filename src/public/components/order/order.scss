@@ -1,4 +1,19 @@
+.height {
+    height: 60px !important;
+}
 
-.height{
-    height: 100px !important;
+
+thead th {
+    padding: 4px 0 !important;
+
+    .field .MuiInputBase-colorPrimary,
+    .field .MuiInputBase-formControl,
+    .field .MuiInputBase-root {
+        border-radius: 3px !important;
+        height: 35px !important;
+    }
+}
+
+thead th:first-child {
+    padding: 4px 7px !important;
 }

@@ -10,7 +10,7 @@
     .MuiInputBase-colorPrimary,
     .MuiInputBase-formControl,
     .MuiInputBase-root {
-        width: 100%;
+        width: 100% !important;
         line-height: 39px !important;
         height: 38px !important;
         // padding: 0 10px !important;
@@ -28,29 +28,75 @@
         }
     }
 
+    .MuiTextField-root {
+        width: 100% !important;
+    }
+
     .MuiStack-root {
         overflow: hidden !important;
     }
 
     .MuiButton-root {
-        color: #3d3d3d ;
+        color: #3d3d3d;
         border-radius: 10px !important;
-        background-color: #fff ;
+        background-color: #fff;
         border: 1px solid #FFC7BF !important;
         font-family: 'Poppins', sans-serif !important;
         box-shadow: none !important;
+        width: 100% !important;
     }
 
-    .MuiButton-root:hover{
-        background-color: #fff ;
+    .MuiButton-root:hover {
+        background-color: #fff;
     }
+}
+
+.field small{
+    color: red;
+    font-size: 13px;
+}
+
+.selectfileInputPay {
+    position: absolute !important;
+    width: 92% !important;
+    opacity: 0;
+}
+
+.simleDocument .field {
+    input {
+        width: 100% !important;
+        line-height: 39px !important;
+        height: 38px !important;
+        // padding: 0 10px !important;
+        box-sizing: border-box;
+        background-color: #fff;
+        font-size: 16px;
+        color: #3d3d3d;
+        border: 1px solid #FFC7BF !important;
+        border-radius: 10px;
+        outline: none !important;
+
+        &:focus {
+            outline: 0;
+            border: 1px solid #fda395;
+        }
+    }
+}
+
+.uploadFile {
+    width: 20px;
+    height: 20px;
+    margin-top: -65px;
+    margin-left: 88%;
+    color: #ff725e;
+    cursor: pointer;
 }
 
 .operation-btns .field {
     .MuiButton-root {
         color: #fff;
         background: #FF725E;
-    
+
     }
 }
 
@@ -71,7 +117,7 @@
     animation-name: mui-auto-fill-cancel;
     -webkit-animation-duration: 10ms;
     animation-duration: 10ms;
-    padding: 8.5px 5px !important;
+    padding: 8.5px 0 0 4px !important;
 }
 
 .MuiFormLabel-root {
@@ -79,16 +125,17 @@
 }
 
 .MuiInputLabel-root .Mui-focused {
-  display: none !important;
+    display: none !important;
 }
 
-.MuiOutlinedInput-root{
+.MuiOutlinedInput-root {
     // display: none  !important;
     border: none !important;
     outline: none !important;
-    & fieldset{
+
+    & fieldset {
         border: none;
-      }
+    }
 }
 
 
@@ -109,6 +156,71 @@
 
 }
 
-.label-date .field label{
-    top: -11px; 
+.label-date .field label {
+    top: -11px;
+}
+
+.MuiFormControl-root {
+    width: 100% !important;
+}
+
+.multiselect .MuiFormControl-root {
+    margin: 0 !important;
+}
+
+.page {
+    .field {
+        position: relative;
+        margin: 0;
+
+        input[type=text],
+        input[type=password] {
+            width: 100% !important;
+            line-height: 39px !important;
+            height: 38px !important;
+            // padding: 0 10px !important;
+            box-sizing: border-box;
+            background-color: #fff;
+            font-size: 16px;
+            color: #3d3d3d;
+            border: 1px solid #FFC7BF !important;
+            border-radius: 10px;
+            outline: none !important;
+
+            &:focus {
+                outline: 0 !important;
+                border: 1px solid #fda395 !important;
+            }
+        }
+
+    }
+}
+
+.addBtn{
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background: #a0cafc;
+    color: #fff;
+    width: 100%;
+    height: 35px;
+}
+
+.removeBtn{
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background: #e0273a;
+    color: #fff;
+    width: 100%;
+    height: 35px;
+}
+
+
+
+
+@media only screen and (max-width: 991px) {
+    .field{
+        margin: 13px 0;
+    }
 }

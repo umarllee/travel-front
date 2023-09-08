@@ -34,7 +34,7 @@ function Public() {
                 <div className="p-0 m-0">
                     <Header update={headerCalling} />
                 </div>
-                <div className="px-4 pt-5">
+                <div className="px-4 pt-4  ">
                     <Outlet />
                 </div>
 

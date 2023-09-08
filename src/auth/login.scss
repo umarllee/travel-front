@@ -1,18 +1,18 @@
-h1{
+h1 {
     color: red;
 }
 
-.travel-logo{
+.travel-logo {
     height: 100vh;
     display: flex;
 }
 
-.travel-logo img{
+.travel-logo img {
     height: 80vh;
     margin: auto;
 }
 
-.form-container{
+.form-container {
     background-color: #fff;
     border-radius: 20px;
     margin: auto 0;
@@ -23,7 +23,7 @@ h1{
 }
 
 
-.login{
+.login {
     font-weight: 500;
     outline: none;
     border: none;
@@ -32,4 +32,13 @@ h1{
     width: 100%;
     background-color: #ff725e;
     color: #fff;
+}
+
+
+
+thead th {
+    .field input[type=text] {
+        height: 35px !important;
+        border-radius: 0px !important;
+    }
 }

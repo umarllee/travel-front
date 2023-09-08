@@ -4,6 +4,23 @@
     font-family: 'Poppins', sans-serif;
 }
 
+*::-webkit-scrollbar {
+    width: 7px;
+    height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    box-shadow: none;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: cornflowerblue !important;
+    border-radius: 2px;
+}
+
+
 .pagination {
     margin-top: 20px;
     padding-right: 1.5rem !important;
@@ -59,7 +76,7 @@ td {
     border-bottom: 1px solid #dedede !important;
 }
 
-td:first-child{
+td:first-child {
     text-align: center !important;
 }
 
@@ -68,3 +85,57 @@ th {
     color: #fff;
     text-align: center !important;
 }
+
+.smallRow tbody,
+.smallRow td,
+.smallRow tfoot,
+.smallRow tr {
+    height: 32px !important;
+    padding: 3px 5px !important;
+}
+
+.table-container {
+    overflow: auto;
+    box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12);
+
+
+}
+
+.table-container td,
+.table-container th {
+    min-width: 180px !important;
+
+}
+
+.mat-elevation-z1 {
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)
+}
+
+.mat-elevation-z2 {
+	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)
+}
+
+.mat-elevation-z3 {
+	box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12)
+}
+
+.mat-elevation-z4 {
+	box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)
+}
+
+.mat-elevation-z5 {
+	box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12)
+}
+
+.mat-elevation-z6 {
+	box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)
+}
+
+.mat-elevation-z7 {
+	box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12)
+}
+
+.mat-elevation-z8 {
+	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)
+}
+

@@ -1,8 +1,9 @@
 .header {
     min-height: 8vh;
     align-items: center;
-    background-color: #fff;
-    box-shadow: 0px 3px 1px -2px #FF725E, 0px 2px 2px 0px #FF725E, 0px 1px 5px 0px #FF725E;
+    background-color: cornflowerblue;
+    color: #fff;
+    box-shadow: 0px 3px 1px -2px #FF725E, 0px 0px 2px 0px #FF725E, 0px 1px 5px 0px #FF725E;
     font-size: 17px;
     font-weight: 500;
     position: sticky;
@@ -17,16 +18,15 @@
 }
 
 .logoSvg {
-    // background-color: #ff725e;
     width: 60%;
     min-width: 130px;
     height: 8vh !important;
     box-shadow: 3px 0 #ff725e;
     border-radius: 0 27px 27px 0;
-    // color: #ff725e;
-    // font-size: 21px;
     /* padding: 0px 44px; */
     cursor: pointer;
     line-height: 8vh;
+    background: #fff;
+    color: #ff725e;
     text-align: center;
 }
