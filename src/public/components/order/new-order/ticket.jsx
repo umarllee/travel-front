@@ -101,7 +101,15 @@ export function Ticket() {
     function addAdult() {
         let newNames = [...names, 'Adult']
         setNames(newNames);
-        addForm();
+        addForm(
+            {
+                initialValues: {
+                    id: 0,
+                    docNo: "",
+                    docType: 0,
+                }
+            }
+        );
     }
 
     const removeAdult = () => {
@@ -113,7 +121,15 @@ export function Ticket() {
     function addChildren() {
         let newNames = [...names, 'Children']
         setNames(newNames);
-        addForm();
+        addForm(
+            {
+                initialValues: {
+                    id: 0,
+                    docNo: "",
+                    docType: 0,
+                }
+            }
+        );
     }
 
     const removeChildren = () => {
@@ -125,7 +141,15 @@ export function Ticket() {
     function addBaby() {
         let newNames = [...names, 'Baby']
         setNames(newNames);
-        addForm();
+        addForm(
+            {
+                initialValues: {
+                    id: 0,
+                    docNo: "",
+                    docType: 0,
+                }
+            }
+        );
     }
 
     const removeBaby = () => {

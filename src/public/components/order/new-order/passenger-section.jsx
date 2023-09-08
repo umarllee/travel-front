@@ -181,7 +181,7 @@ export function PassengerSection({ formItem, name }) {
         <div className={closeState ? "closeContainer" : ''} style={{ transition: '2s' }}  >
             <div className='row m-0 pt-2 mt-4'>
 
-                <input {...fields.id} type="number" className='d-none' value={0} />
+                <input {...fields.id} type="number" className='d-none' defaultValue={0} />
 
                 <div className="col-md-3">
                     <div className="field">
