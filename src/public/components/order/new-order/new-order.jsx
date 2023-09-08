@@ -4,7 +4,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -25,6 +25,7 @@ import Menu from '@mui/material/Menu';
 import { Ticket } from './ticket';
 import { useForm } from "react-hook-form";
 
+
 function Order(props) {
     // const [value, setValue] = useState('female');
 
@@ -36,9 +37,9 @@ function Order(props) {
 
     const { register, handleSubmit, formState: { errors }, getValues, setValue } = form;
 
-    useEffect(() => {
-        console.log(getValues());
-    }, [])
+    // useEffect(() => {
+    //     console.log(getValues());
+    // }, [])
 
     function consoleForm() {
         console.log(getValues())
@@ -168,9 +169,11 @@ function NewOrder() {
         );
     }
 
-
+    const actionRef = useRef();
     const onHandleSave = (data) => {
         // console.log(data)
+        const childData = actionRef.current.getData();
+        console.log(childData);
     }
 
     // const onHandleSave = (data) => {
@@ -191,7 +194,7 @@ function NewOrder() {
                     </Tabs>
                 </Box>
                 <CustomTabPanel value={value} index={0}>
-                    <Ticket />
+                    <Ticket ref={actionRef} />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
                     Item Two
