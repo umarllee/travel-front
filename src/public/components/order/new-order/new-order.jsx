@@ -25,6 +25,9 @@ import Menu from '@mui/material/Menu';
 import { Ticket } from './ticket';
 import { useForm } from "react-hook-form";
 
+import { createFormArray, field, useFluentFormArray } from 'react-fluent-form';
+import { useFluentFormItem } from 'react-fluent-form';
+import { createStore } from 'redux'
 
 function Order(props) {
     // const [value, setValue] = useState('female');
@@ -135,10 +138,54 @@ function Order(props) {
 
 function NewOrder() {
 
-    const [value, setValue] = useState(0);
+    function counterReducer(state = {
+        backDate: "",
+        to: "",
+    }, action) {
+        state = action.payload;
+        return state
+    }
+
+    // Create a Redux store holding the state of your app.
+    // Its API is { subscribe, dispatch, getState }.
+    let store = createStore(counterReducer)
+
+    // You can use subscribe() to update the UI in response to state changes.
+    // Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
+    // There may be additional use cases where it's helpful to subscribe as well.
+
+
+
+
+    const [value, setValueTabs] = useState(0);
+    const [data, setData] = useState({});
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        // const childData = actionRef.current?.getData();
+        // console.log(childData);
+        // store.dispatch({ type: 'ticket', payload: {backDate : "",
+        // bron: false,
+        // bronDate: "",
+        // flyDate: "",
+        // from:"",
+        // notifyHour: "",
+        // passangers: [],
+        // service: "",
+        // to: "",} })
+
+        setData({
+            backDate: "18/09/2023",
+            bron: false,
+            bronDate: "14/09/2023",
+            flyDate: "13/09/2023",
+            from: "Baku",
+            notifyHour: 2,
+            passangers: [],
+            service: 2,
+            to: "Kanada",
+        })
+
+        setValueTabs(newValue);
     };
 
     function a11yProps(index) {
@@ -169,23 +216,48 @@ function NewOrder() {
         );
     }
 
-    const actionRef = useRef();
-    const onHandleSave = (data) => {
-        // console.log(data)
-        const childData = actionRef.current.getData();
-        console.log(childData);
-    }
+    const form = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue, getValues } = form;
 
-    // const onHandleSave = (data) => {
-    //     console.log(data);
-    // }
+    const userRoleConfig = createFormArray()({
+        id: field.number(),
+        docNo: field.text(),
+        docType: field.select(),
+    })
+        .withInitialArray([
+            {
+                id: 0,
+                docNo: "",
+                docType: 0,
+            },
+        ])
+        .withKeyGenerator(item => item.id);
+
+    const { formStates, addForm, resetArray, formArray, removeForm, setInitialArray } = useFluentFormArray(
+        userRoleConfig
+    );
+
+    const actionRef = useRef();
+    const onHandleSave = () => {
+
+        console.log(data)
+        // const childData = actionRef.current?.getData();
+        // console.log(childData);
+        // store.subscribe(() => console.log(store.getState()));
+
+        // store.dispatch({  })
+
+        // store.subscribe(() => console.log(store.getState()));
+        store.subscribe(() => console.log(store.getState()))
+
+    }
 
     return <>
 
-        <Order handleSave={onHandleSave} />
+        <Order  />
 
         <div className="mt-2 mb-3 mat-elevation-z3 bg-white px-2 pt-2 pb-3" style={{ borderRadius: ' 10px' }} >
-            <Box sx={{ width: '100%' }}> 
+            <Box sx={{ width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                         <Tab label="Ticket" {...a11yProps(0)} />

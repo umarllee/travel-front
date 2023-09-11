@@ -60,7 +60,7 @@ const variants = [
 
 export function PassengerSection({ formItem, name }) {
 
-    const { removeSelf, handleSubmit, fields } = useFluentFormItem(
+    const { removeSelf, handleSubmit, fields, values, key } = useFluentFormItem(
         formItem
     );
 
@@ -81,6 +81,8 @@ export function PassengerSection({ formItem, name }) {
 
         let modelArr = [...addServices, model];
         setAddServices(modelArr);
+
+       console.log(addServices)
     }
 
     useEffect(() => {
@@ -156,6 +158,16 @@ export function PassengerSection({ formItem, name }) {
         }
     }
 
+    // function setDateBirth(e) {
+    //    : fields.birthdate = '' //birthDate
+    //    index == 2 ? fields.docExpdate = e.$d : fields.docExpdate = '' //docExpdate
+    // //     console.log(index)
+    //     console.log(fields)
+    // }
+
+    const setDateBirth = (e) => { values.birthdate = e.$d }
+    const setDateDocExp = (e) => { values.docExpdate = e.$d }
+
     return <>
         <div className="d-flex justify-content-between mt-2 col-lg-12 mx-auto ps-2 tabHeaders">
             <span >
@@ -174,7 +186,8 @@ export function PassengerSection({ formItem, name }) {
                     :
                     <svg onClick={handleClose} xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" className="bi bi-chevron-up ng-star-inserted" style={{ cursor: 'pointer' }}>
                         <path fillRule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"></path>
-                    </svg>}
+                    </svg>
+                }
             </span>
         </div>
 
@@ -222,6 +235,7 @@ export function PassengerSection({ formItem, name }) {
                         <TextField
                             id="Name"
                             name="Name"
+                            {...fields.name}
                         />
                     </div>
                 </div>
@@ -231,6 +245,7 @@ export function PassengerSection({ formItem, name }) {
                         <TextField
                             id="Surname"
                             name="Surname"
+                            {...fields.surname}
                         />
                     </div>
                 </div>
@@ -241,15 +256,13 @@ export function PassengerSection({ formItem, name }) {
                     <div className="field">
                         <label htmlFor='' > Gender </label>
                         <FormControl fullWidth>
-                            <Select
+                            <Select  {...fields.gender.select}
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={age}
-                                onChange={handleChange}
                             >
                                 {filterList.map((item, i) => {
                                     return (
-                                        <MenuItem key={i} value={item.value}>
+                                        <MenuItem {...fields.gender.option(item.value)} key={i} value={item.value}>
                                             <div key={i}>{item.name}</div>
                                         </MenuItem>
                                     );
@@ -264,7 +277,7 @@ export function PassengerSection({ formItem, name }) {
                     <div className="field">
                         <label htmlFor='orderNo' > Birth date </label>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker />
+                            <DatePicker onChange={(e) => setDateBirth(e)} />
                         </LocalizationProvider>
                     </div>
                 </div>
@@ -274,6 +287,7 @@ export function PassengerSection({ formItem, name }) {
                         <TextField
                             id="Name"
                             name="Name"
+                            {...fields.docCountry}
                         />
                     </div>
                 </div>
@@ -281,7 +295,7 @@ export function PassengerSection({ formItem, name }) {
                     <div className="field">
                         <label htmlFor='Surname' > Document expire date</label>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker />
+                            <DatePicker onChange={(e) => setDateDocExp(e)} />
                         </LocalizationProvider>
                     </div>
                 </div>
@@ -308,7 +322,9 @@ export function PassengerSection({ formItem, name }) {
 
                 {
                     addServices.map((dt, index) => {
+                        const fieldName = `friends[${index}]`;
                         return (
+                            
                             <div className='row m-0 mt-4 p-0 ' key={index}>
                                 {
                                     index == addServices.length - 1 ? <div className="col-sm-1">
