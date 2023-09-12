@@ -54,12 +54,13 @@ export const Ticket = forwardRef(function (props, ref) {
     const form = useForm();
     const { register, handleSubmit, formState: { errors }, setValue, getValues } = form;
 
+
     useImperativeHandle(
         ref,
         () => {
             return {
                 getData: () => {
-                    let newModel = { ...getValues(), passangers: formStates.map(state => state.values) };
+                    let newModel = { ...getValues(), passengers: formStates.map(state => state.values) };
                     return newModel;
                 },
             }

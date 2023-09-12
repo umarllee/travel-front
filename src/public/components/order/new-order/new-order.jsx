@@ -28,25 +28,13 @@ import { useForm } from "react-hook-form";
 import { createFormArray, field, useFluentFormArray } from 'react-fluent-form';
 import { useFluentFormItem } from 'react-fluent-form';
 import { createStore } from 'redux'
+import { Hotel } from './hotel';
 
 function Order(props) {
-    // const [value, setValue] = useState('female');
-
-    // const handleChange = (event) => {
-    //     setValue((event.target).value);
-    // };
 
     const form = useForm();
 
     const { register, handleSubmit, formState: { errors }, getValues, setValue } = form;
-
-    // useEffect(() => {
-    //     console.log(getValues());
-    // }, [])
-
-    function consoleForm() {
-        console.log(getValues())
-    }
 
     const handleChangeDate = (date) => {
         setValue('orderDate', `${date.$d.toISOString()}`)
@@ -121,7 +109,7 @@ function Order(props) {
                 <div className="col-lg-3">
                     <div className="field">
                         <label htmlFor='email' > Email </label>
-                        <TextField onClick={consoleForm}
+                        <TextField
                             type='email'
                             id="email"
                             name="email"
@@ -146,33 +134,12 @@ function NewOrder() {
         return state
     }
 
-    // Create a Redux store holding the state of your app.
-    // Its API is { subscribe, dispatch, getState }.
     let store = createStore(counterReducer)
 
-    // You can use subscribe() to update the UI in response to state changes.
-    // Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
-    // There may be additional use cases where it's helpful to subscribe as well.
-
-
-
-
     const [value, setValueTabs] = useState(0);
-    const [data, setData] = useState({});
+    const [ticketData, setData] = useState({});
 
     const handleChange = (event, newValue) => {
-        // const childData = actionRef.current?.getData();
-        // console.log(childData);
-        // store.dispatch({ type: 'ticket', payload: {backDate : "",
-        // bron: false,
-        // bronDate: "",
-        // flyDate: "",
-        // from:"",
-        // notifyHour: "",
-        // passangers: [],
-        // service: "",
-        // to: "",} })
-
         setData({
             backDate: "18/09/2023",
             bron: false,
@@ -180,7 +147,7 @@ function NewOrder() {
             flyDate: "13/09/2023",
             from: "Baku",
             notifyHour: 2,
-            passangers: [],
+            passengers: [],
             service: 2,
             to: "Kanada",
         })
@@ -219,42 +186,19 @@ function NewOrder() {
     const form = useForm();
     const { register, handleSubmit, formState: { errors }, setValue, getValues } = form;
 
-    const userRoleConfig = createFormArray()({
-        id: field.number(),
-        docNo: field.text(),
-        docType: field.select(),
-    })
-        .withInitialArray([
-            {
-                id: 0,
-                docNo: "",
-                docType: 0,
-            },
-        ])
-        .withKeyGenerator(item => item.id);
-
-    const { formStates, addForm, resetArray, formArray, removeForm, setInitialArray } = useFluentFormArray(
-        userRoleConfig
-    );
 
     const actionRef = useRef();
+    const actionRefHotel = useRef();
     const onHandleSave = () => {
-
-        console.log(data)
-        // const childData = actionRef.current?.getData();
-        // console.log(childData);
-        // store.subscribe(() => console.log(store.getState()));
-
-        // store.dispatch({  })
-
-        // store.subscribe(() => console.log(store.getState()));
-        store.subscribe(() => console.log(store.getState()))
-
+        let dt = actionRef.current?.getData();
+        let dtHotel = actionRefHotel.current?.getData();
+        console.log(dt);
+        console.log(dtHotel);
     }
 
     return <>
 
-        <Order  />
+        <Order />
 
         <div className="mt-2 mb-3 mat-elevation-z3 bg-white px-2 pt-2 pb-3" style={{ borderRadius: ' 10px' }} >
             <Box sx={{ width: '100%' }}>
@@ -269,7 +213,7 @@ function NewOrder() {
                     <Ticket ref={actionRef} />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
-                    Item Two
+                    <Hotel ref={actionRefHotel} />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={2}>
                     Item Three

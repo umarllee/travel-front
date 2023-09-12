@@ -58,43 +58,20 @@ const variants = [
 ];
 
 
-export function PassengerSection({ formItem, name }) {
-
+export function HotelSection({ formItem, name }) {
     const { removeSelf, handleSubmit, fields, values, key } = useFluentFormItem(
         formItem
     );
 
-    const [addServices, setAddServices] = useState([
-        {
-            service: 0,
-            go: '',
-            back: ''
-        }
-    ]);
+    const [closeState, setCloseState] = useState(false);
 
-    useEffect(() => {
-        values.additionalServices = addServices;
-    }, [addServices]);
-
-    function addService() {
-        let model = {
-            service: 0,
-            go: '',
-            back: ''
-        }
-
-        let modelArr = [...addServices, model];
-        setAddServices(modelArr);
-        values.additionalServices = addServices;
+    const handleClose = () => {
+        setCloseState(true)
     }
 
-    function removeService(index) {
-        let newArr = [...addServices.filter((item, i) => i !== index)]
-        setAddServices(newArr)
-        values.additionalServices = addServices;
+    const handleOpen = () => {
+        setCloseState(false);
     }
-
-    const [age, setAge] = useState('');
 
     const filterList = [
         {
@@ -110,48 +87,6 @@ export function PassengerSection({ formItem, name }) {
             name: 'Deactive'
         },
     ]
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
-
-    const [variantName, setVariantName] = useState([]);
-
-    const handleChangeMultiSelect = (event) => {
-        const {
-            target: { value },
-        } = event;
-
-        const filterdValue = value.filter(
-            (item) => variantName.findIndex((o) => o.id == item.id) >= 0
-        );
-
-        let duplicatesRemoved = value.filter((item, itemIndex) =>
-            value.findIndex((o, oIndex) => o.id == item.id && oIndex !== itemIndex)
-        );
-
-        let duplicateRemoved = [];
-
-        value.forEach((item) => {
-            if (duplicateRemoved.findIndex((o) => o.id == item.id) >= 0) {
-                duplicateRemoved = duplicateRemoved.filter((x) => x.id == item.id);
-            } else {
-                duplicateRemoved.push(item);
-            }
-        });
-
-        setVariantName(duplicateRemoved);
-    };
-
-    const [closeState, setCloseState] = useState(false);
-
-    const handleClose = () => {
-        setCloseState(true)
-    }
-
-    const handleOpen = () => {
-        setCloseState(false);
-    }
 
     const setDateBirth = (e) => { values.birthdate = e.$d }
     const setDateDocExp = (e) => { values.docExpdate = e.$d }
@@ -178,6 +113,7 @@ export function PassengerSection({ formItem, name }) {
                 }
             </span>
         </div>
+
 
         <div className={closeState ? "closeContainer" : ''} style={{ transition: '2s' }}  >
             <div className='row m-0 pt-2 mt-4'>
@@ -305,114 +241,7 @@ export function PassengerSection({ formItem, name }) {
                 </div>
             </div>
 
-            <div className="row col-lg-12 mt-1 my-3 mx-auto ps-2 tabHeaders additionalService"> Əlavə xidmətlər </div>
-
-            <div className='row m-0'>
-
-                {
-                    addServices.map((dt, index) => {
-                        return (
-                            <div className='row m-0 mt-4 p-0 ' key={index}>
-                                {
-                                    index == addServices.length - 1 ? <div className="col-sm-1">
-                                        <button className='addBtn' onClick={addService}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
-                                                <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                                            </svg>
-                                        </button>
-                                    </div> : ''
-                                }
-
-                                <div className="col-md-3">
-                                    <div className="field">
-                                        <label htmlFor='' > Service </label>
-                                        <FormControl fullWidth>
-                                            <Select
-                                                labelId="demo-simple-select-label"
-                                                id="demo-simple-select"
-                                                onChange={(e) => addServices[index].service = e.target.value}
-                                                
-                                            >
-                                                {filterList.map((item, i) => {
-                                                    return (
-                                                        <MenuItem key={i} value={item.value}>
-                                                            <div key={i}>{item.name}</div>
-                                                        </MenuItem>
-                                                    );
-                                                })}
-                                            </Select>
-                                        </FormControl>
-                                    </div>
-                                </div>
-
-                                <div className="col-lg-4">
-                                    <div className="field">
-                                        <label htmlFor='Name' > Going </label>
-                                        <TextField
-                                            id="Name"
-                                            name="Name"
-                                            onChange={(e) => addServices[index].go = e.target.value}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="col-lg-4">
-                                    <div className="field">
-                                        <label htmlFor='Name' > Back </label>
-                                        <TextField
-                                            id="Name"
-                                            name="Name"
-                                            onChange={(e) => addServices[index].back = e.target.value}
-                                        />
-                                    </div>
-                                </div>
-
-                                {
-                                    index != addServices.length - 1 ? <div className="col-sm-1">
-                                        <button className='removeBtn' onClick={() => removeService(index)}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                                            </svg>
-                                        </button>
-                                    </div> : ''
-                                }
-                            </div>
-                        )
-                    })
-                }
-            </div>
-
-            <div className='row m-0 pt-4 mt-4'>
-                <div className="col-md-12 multiselect">
-                    <div className="field">
-                        <label htmlFor='' > Limited passenger </label>
-                        <FormControl sx={{ m: 1, width: 300 }}>
-                            <Select
-                                labelId="demo-multiple-checkbox-label"
-                                id="demo-multiple-checkbox"
-                                multiple
-                                value={variantName}
-                                onChange={handleChangeMultiSelect}
-                                input={<OutlinedInput label="Tag" />}
-                                renderValue={(selected) => selected.map((x) => x.name).join(', ')}
-                                MenuProps={MenuProps}
-                            >
-                                {variants.map((variant) => (
-                                    <MenuItem key={variant.id} value={variant}>
-                                        <Checkbox
-                                            checked={
-                                                variantName.findIndex((item) => item.id == variant.id) >= 0
-                                            }
-                                        />
-                                        <ListItemText primary={variant.name} />
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </div>
-                </div>
-            </div>
         </div>
-
     </>
+
 }
