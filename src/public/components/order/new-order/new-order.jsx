@@ -137,20 +137,32 @@ function NewOrder() {
     let store = createStore(counterReducer)
 
     const [value, setValueTabs] = useState(0);
-    const [ticketData, setData] = useState({});
+    const [ticketData, setTicketData] = useState({});
+    const [hotelData, setHotelData] = useState({});
 
+    const [isChangeTab, setIsChangeTab] = useState(false);
+
+    const actionRef = useRef();
+    const actionRefHotel = useRef();
     const handleChange = (event, newValue) => {
-        setData({
-            backDate: "18/09/2023",
-            bron: false,
-            bronDate: "14/09/2023",
-            flyDate: "13/09/2023",
-            from: "Baku",
-            notifyHour: 2,
-            passengers: [],
-            service: 2,
-            to: "Kanada",
-        })
+        // setTicketData({
+        //     backDate: "18/09/2023",
+        //     bron: false,
+        //     bronDate: "14/09/2023",
+        //     flyDate: "13/09/2023",
+        //     from: "Baku",
+        //     notifyHour: 2,
+        //     passengers: [],
+        //     service: 2,
+        //     to: "Kanada",
+        // })
+
+
+        actionRef.current ? setTicketData(actionRef.current?.getData()) : setTicketData(ticketData);
+        actionRefHotel.current ? setHotelData(actionRefHotel.current?.getData()) : setHotelData(hotelData);
+        
+
+        setIsChangeTab(true)
 
         setValueTabs(newValue);
     };
@@ -187,13 +199,12 @@ function NewOrder() {
     const { register, handleSubmit, formState: { errors }, setValue, getValues } = form;
 
 
-    const actionRef = useRef();
-    const actionRefHotel = useRef();
     const onHandleSave = () => {
-        let dt = actionRef.current?.getData();
-        let dtHotel = actionRefHotel.current?.getData();
-        console.log(dt);
-        console.log(dtHotel);
+
+        console.log(ticketData);
+        console.log(hotelData);
+
+
     }
 
     return <>
