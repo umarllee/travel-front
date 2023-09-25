@@ -215,7 +215,7 @@ const TableContent = (data) => {
               <th colSpan={4}></th>
               <th colSpan={2}>Airway</th>
               <th colSpan={2}>Hotel</th>
-              <th ></th>
+              <th></th>
             </tr>
             <tr>
               {columns.map((column, i) =>

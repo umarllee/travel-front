@@ -9,6 +9,7 @@
     // .MuiOutlinedInput-root,
     .MuiInputBase-colorPrimary,
     .MuiInputBase-formControl,
+    input[type=number],
     .MuiInputBase-root {
         width: 100% !important;
         line-height: 39px !important;
@@ -174,6 +175,7 @@
         margin: 0;
 
         input[type=text],
+        input[type=number],
         input[type=password] {
             width: 100% !important;
             line-height: 39px !important;
@@ -186,6 +188,7 @@
             border: 1px solid #FFC7BF !important;
             border-radius: 10px;
             outline: none !important;
+            padding: 0 8px;
 
             &:focus {
                 outline: 0 !important;
@@ -223,4 +226,15 @@
     .field{
         margin: 13px 0;
     }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

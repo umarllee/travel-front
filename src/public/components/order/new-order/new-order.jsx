@@ -29,6 +29,8 @@ import { createFormArray, field, useFluentFormArray } from 'react-fluent-form';
 import { useFluentFormItem } from 'react-fluent-form';
 import { createStore } from 'redux'
 import { Hotel } from './hotel';
+import { getNumberService } from '../../services/getNumber';
+import Evaluation from './evaluation';
 
 function Order(props) {
 
@@ -125,44 +127,32 @@ function Order(props) {
 
 
 function NewOrder() {
-
-    function counterReducer(state = {
-        backDate: "",
-        to: "",
-    }, action) {
-        state = action.payload;
-        return state
-    }
-
-    let store = createStore(counterReducer)
-
     const [value, setValueTabs] = useState(0);
     const [ticketData, setTicketData] = useState({});
     const [hotelData, setHotelData] = useState({});
+    const [evaluationData, setEvaluationData] = useState({});
 
-    const [isChangeTab, setIsChangeTab] = useState(false);
+    const [isChangeTabTicket, setIsChangeTabTicket] = useState(false);
+    const [isChangeTabHotel, setIsChangeTabHotel] = useState(false);
+    const [isChangeTabEvaluation, setIsChangeTabEvaluation] = useState(false);
 
     const actionRef = useRef();
     const actionRefHotel = useRef();
+
     const handleChange = (event, newValue) => {
-        // setTicketData({
-        //     backDate: "18/09/2023",
-        //     bron: false,
-        //     bronDate: "14/09/2023",
-        //     flyDate: "13/09/2023",
-        //     from: "Baku",
-        //     notifyHour: 2,
-        //     passengers: [],
-        //     service: 2,
-        //     to: "Kanada",
-        // })
+        console.log(newValue)
+        console.log(actionRefHotel.current?.getData())
+
+        newValue == 0 ? setIsChangeTabTicket(true) : setIsChangeTabTicket(isChangeTabTicket);
+        newValue == 1 ? setIsChangeTabHotel(true) : setIsChangeTabHotel(isChangeTabHotel);
+        newValue == 2 ? setIsChangeTabEvaluation(true) : setIsChangeTabEvaluation(isChangeTabEvaluation);
 
 
         actionRef.current ? setTicketData(actionRef.current?.getData()) : setTicketData(ticketData);
         actionRefHotel.current ? setHotelData(actionRefHotel.current?.getData()) : setHotelData(hotelData);
-        
 
-        setIsChangeTab(true)
+
+        // setIsChangeTab(true)
 
         setValueTabs(newValue);
     };
@@ -201,8 +191,58 @@ function NewOrder() {
 
     const onHandleSave = () => {
 
+        getNumberService.getNumbers().then(data => console.log(data)).catch(err => console.log(err));
+
+        let defHotelData = {
+            bron: false,
+            bronDate: "",
+            enterDate: "",
+            exitDate: "",
+            guestCount: "",
+            hotel: "",
+            notifyHour: "",
+            rooms: [],
+        }
+
+        // let defHotelData = {
+        //     bron: false,
+        //     bronDate: "",
+        //     enterDate: "",
+        //     exitDate: "",
+        //     guestCount: "",
+        //     hotel: "",
+        //     notifyHour: "",
+        //     rooms: [],
+        // }
+        console.log(isChangeTabTicket);
+        console.log(isChangeTabHotel);
+        console.log(isChangeTabEvaluation);
+
+        console.log(actionRef.current?.getData());
+        console.log(actionRefHotel.current?.getData());
+
+        // if (!isChangeTabTicket && !isChangeTabHotel && !isChangeTabEvaluation) {
+        //     alert('ticket')
+        //     setTicketData(actionRef.current?.getData());
+        // }
+
+        // else if ((isChangeTabTicket && !isChangeTabHotel && isChangeTabEvaluation) || (!isChangeTabTicket && isChangeTabHotel && !isChangeTabEvaluation)) {
+        //     alert('hotelTicket')
+        //     setHotelData(actionRefHotel.current?.getData());
+        // }
+
+        // else if((!isChangeTabTicket && isChangeTabHotel && isChangeTabEvaluation) || (isChangeTabTicket && isChangeTabHotel && isChangeTabEvaluation)) {
+        //     alert('ucude')
+        //     setEvaluationData('evaluation data');
+        // }
+        // actionRef.current ? setTicketData(actionRef.current?.getData()) : setTicketData(ticketData);
         console.log(ticketData);
-        console.log(hotelData);
+        // console.log(hotelData);
+        // console.log(evaluationData);
+
+        // localStorage.setItem('ticketData', JSON.stringify(ticketData))
+        // localStorage.setItem('hotelData',  JSON.stringify(hotelData) )
+        // localStorage.setItem('evaluationData', JSON.stringify(evaluationData) )
 
 
     }
@@ -227,7 +267,7 @@ function NewOrder() {
                     <Hotel ref={actionRefHotel} />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={2}>
-                    Item Three
+                    <Evaluation />
                 </CustomTabPanel>
             </Box>
 
