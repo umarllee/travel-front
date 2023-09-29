@@ -390,7 +390,7 @@ export const Ticket = forwardRef(function (props, ref) {
                 </div>
             </div>
 
-            <div className='row m-0 pt-2 mt-4'>
+            <div className='row m-0 pt-2 mt-4'> 
                 {formArray.map((item, index) => (
                     <PassengerSection key={item.key} formItem={item} name={names[index]} getDataPassengers={getDataPassenger} />
                 ))}

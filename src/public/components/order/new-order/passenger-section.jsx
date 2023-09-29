@@ -330,8 +330,13 @@ export function PassengerSection({ formItem, name }) {
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
-                                                onChange={(e) => addServices[index].service = e.target.value}
-                                                
+                                                value={addServices[index].service}
+                                                onChange={(e) => {
+                                                    const newArr = [...addServices]
+                                                    newArr[index].service = e.target.value;
+                                                    setAddServices(newArr)
+                                                }}
+
                                             >
                                                 {filterList.map((item, i) => {
                                                     return (
@@ -351,7 +356,12 @@ export function PassengerSection({ formItem, name }) {
                                         <TextField
                                             id="Name"
                                             name="Name"
-                                            onChange={(e) => addServices[index].go = e.target.value}
+                                            value={addServices[index].go}
+                                            onChange={(e) => {
+                                                const newArr = [...addServices]
+                                                newArr[index].go = e.target.value;
+                                                setAddServices(newArr)
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -362,7 +372,12 @@ export function PassengerSection({ formItem, name }) {
                                         <TextField
                                             id="Name"
                                             name="Name"
-                                            onChange={(e) => addServices[index].back = e.target.value}
+                                            value={addServices[index].back}
+                                            onChange={(e) => {
+                                                const newArr = [...addServices]
+                                                newArr[index].back = e.target.value;
+                                                setAddServices(newArr)
+                                            }}
                                         />
                                     </div>
                                 </div>

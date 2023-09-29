@@ -5,43 +5,9 @@ import { useState, useEffect } from 'react';
 import FormControl from '@mui/material/FormControl';
 import './new-order.scss'
 import { createFormArray, field, useFluentFormArray } from 'react-fluent-form';
-import { useFluentFormItem } from 'react-fluent-form';
-import { getValue } from '@testing-library/user-event/dist/utils';
+
 
 export default function Evaluation() {
-
-    const userRoleConfig = createFormArray()({
-        id: field.number(),
-        docNo: field.text(),
-        name: field.text(),
-        surname: field.text(),
-        gender: field.select(),
-        birthdate: field.date(),
-        docType: field.select(),
-        docCountry: field.text(),
-        docExpdate: field.date(),
-        additionalServices: field.text(),
-    })
-        .withInitialArray([
-            {
-                id: 0,
-                docNo: "",
-                name: "",
-                surname: "",
-                docType: 0,
-                gender: 0,
-                birthdate: new Date(),
-                docCountry: "",
-                docExpdate: new Date(),
-                additionalServices: [],
-            },
-        ])
-        .withKeyGenerator(item => item.id);
-
-    const { formStates, addForm, resetArray, formArray, setInitialArray } = useFluentFormArray(
-        userRoleConfig
-    );
-
     const filterList = [
         {
             value: 0,
@@ -57,75 +23,57 @@ export default function Evaluation() {
         },
     ]
 
-    // const [addServices, setAddServices] = useState([
-    //     {
-    //         id: 0,
-    //         orderId: 0,
-    //         venderId: 0,
-    //         venderService: 0,
-    //         qty: 0,
-    //         venderUnitPrice: 0,
-    //         venderAmount: 0,
-    //         saleUnitPrice: 0,
-    //         saleAmount: 0,
-    //         vat: 0,
-    //         currency: 1,
-    //         currencyRate: 1,
-    //         profit: 0,
-    //         currencyAmount: 0,
-    //         status: true
-    //     }
-    // ]);
+    const [addServices, setAddServices] = useState([
+        {
+            id: 0,
+            orderId: 0,
+            venderId: 0,
+            venderService: 0,
+            qty: 0,
+            venderUnitPrice: 0,
+            venderAmount: 0,
+            saleUnitPrice: 0,
+            saleAmount: 0,
+            vat: 0,
+            currency: 1,
+            currencyRate: 1,
+            profit: 0,
+            currencyAmount: 0,
+            status: true
+        }
+    ]);
 
     function addService() {
-        // let model = {
-        //     id: 0,
-        //     orderId: 0,
-        //     venderId: 0,
-        //     venderService: 0,
-        //     qty: 0,
-        //     venderUnitPrice: 0,
-        //     venderAmount: 0,
-        //     saleUnitPrice: 0,
-        //     saleAmount: 0,
-        //     vat: 0,
-        //     currency: 1,
-        //     currencyRate: 1,
-        //     profit: 0,
-        //     currencyAmount: 0,
-        //     status: true
-        // }
+        let model = {
+            id: 0,
+            orderId: 0,
+            venderId: 0,
+            venderService: 0,
+            qty: 0,
+            venderUnitPrice: 0,
+            venderAmount: 0,
+            saleUnitPrice: 0,
+            saleAmount: 0,
+            vat: 0,
+            currency: 1,
+            currencyRate: 1,
+            profit: 0,
+            currencyAmount: 0,
+            status: true
+        }
 
-        // let modelArr = [...addServices, model];
-        // setAddServices(modelArr);
-
-        addForm(
-            {
-                initialValues: {
-                    id: 0,
-                    docNo: "",
-                    name: "",
-                    surname: "",
-                    docType: 0,
-                    gender: 0,
-                    birthdate: new Date(),
-                    docCountry: "",
-                    docExpdate: new Date(),
-                    additionalServices: [],
-                }
-            }
-        );
-
-        console.log(formArray)
-        formStates.map(dt => console.log(dt.values))
+        let modelArr = [...addServices, model];
+        setAddServices(modelArr);
     }
 
-    // function removeService(index) {
-    //     const newArray = [...addServices]; // Make a copy of the original array
-    //     newArray.splice(index, 1);
-    //     console.log(newArray);
-    //     setAddServices(newArray);
-    // }
+    function removeService(index) {
+        // let newArr = [...addServices.filter((item, i) => i !== index)]
+        const newArray = [...addServices]; // Make a copy of the original array
+        newArray.splice(index, 1);
+        console.log(newArray);
+
+        setAddServices(newArray);
+    }
 
     const columns = [
         'Service',
@@ -143,7 +91,7 @@ export default function Evaluation() {
     ]
 
     function handleConsole() {
-        // console.log(addServices)
+        console.log(addServices)
     }
 
     return <>
@@ -183,7 +131,7 @@ export default function Evaluation() {
                     </thead>
                     <tbody>
 
-                        {/* {addServices.map((row, index) => (
+                        {addServices.map((row, index) => (
                             <tr key={index}>
                                 <td>
                                     <div className="field">
@@ -191,7 +139,12 @@ export default function Evaluation() {
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
-                                                onChange={(e) => addServices[index].venderService = e.target.value}
+                                                value={addServices[index].venderService}
+                                                onChange={(e) => {
+                                                    const newArr = [...addServices]
+                                                    newArr[index].venderService = e.target.value;
+                                                    setAddServices(newArr)
+                                                }}
                                             >
                                                 {filterList.map((item, i) => {
                                                     return (
@@ -210,7 +163,12 @@ export default function Evaluation() {
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
-                                                onChange={(e) => addServices[index].venderId = e.target.value}
+                                                value={addServices[index].venderId}
+                                                onChange={(e) => {
+                                                    const newArr = [...addServices]
+                                                    newArr[index].venderId = e.target.value;
+                                                    setAddServices(newArr)
+                                                }}
 
                                             >
                                                 {filterList.map((item, i) => {
@@ -226,42 +184,72 @@ export default function Evaluation() {
                                 </td>
                                 <td>
                                     <div className="field">
-
-                                        <input type="number"
-                                            onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
+                                        {/* <TextField
+                                            id="Name"
+                                            name="Name"
+                                            onkeypress={(event) => {return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)}}
                                             onChange={(e) => addServices[index].qty = e.target.value}
+                                        /> */}
+
+                                        <input type="number" value={addServices[index].qty}
+                                            onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
+                                            onChange={(e) => {
+                                                const newArr = [...addServices]
+                                                newArr[index].qty = e.target.value;
+                                                newArr[index].venderAmount = (Number(newArr[index].venderUnitPrice) * Number(newArr[index].qty));
+                                                newArr[index].saleAmount = (Number(newArr[index].saleUnitPrice) * Number(newArr[index].qty));
+                                                setAddServices(newArr)
+                                            }}
                                         />
                                     </div>
                                 </td>
                                 <td>
                                     <div className="field">
-                                        <input type="number"
+                                        <input type="number" value={addServices[index].venderUnitPrice}
                                             onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-                                            onChange={(e) => addServices[index].venderUnitPrice = e.target.value}
+                                            onChange={(e) => {
+                                                const newArr = [...addServices]
+                                                newArr[index].venderUnitPrice = e.target.value;
+                                                newArr[index].venderAmount = (Number(newArr[index].venderUnitPrice) * Number(newArr[index].qty));
+                                                setAddServices(newArr)
+                                            }}
                                         />
                                     </div>
                                 </td>
                                 <td>
                                     <div className="field">
-                                        <input type="number"
+                                        <input readOnly type="number" value={addServices[index].venderAmount}
                                             onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-                                            onChange={(e) => addServices[index].venderAmount = e.target.value}
+                                            onChange={(e) => {
+                                                const newArr = [...addServices]
+                                                newArr[index].venderAmount = e.target.value;
+                                                setAddServices(newArr)
+                                            }}
                                         />
                                     </div>
                                 </td>
                                 <td>
                                     <div className="field">
-                                        <input type="number"
+                                        <input type="number" value={addServices[index].saleUnitPrice}
                                             onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-                                            onChange={(e) => addServices[index].saleUnitPrice = e.target.value}
+                                            onChange={(e) => {
+                                                const newArr = [...addServices]
+                                                newArr[index].saleUnitPrice = e.target.value;
+                                                newArr[index].saleAmount = (Number(newArr[index].saleUnitPrice) * Number(newArr[index].qty));
+                                                setAddServices(newArr);
+                                            }}
                                         />
                                     </div>
                                 </td>
                                 <td>
                                     <div className="field">
-                                        <input type="number"
+                                        <input type="number" readOnly value={addServices[index].saleAmount}
                                             onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-                                            onChange={(e) => addServices[index].saleAmount = e.target.value}
+                                            onChange={(e) => {
+                                                const newArr = [...addServices]
+                                                // newArr[index].saleAmount = e.target.value;
+                                                setAddServices(newArr)
+                                            }}
                                         />
                                     </div>
                                 </td>
@@ -271,8 +259,12 @@ export default function Evaluation() {
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
-                                                onChange={(e) => addServices[index].currency = e.target.value}
-
+                                                value={addServices[index].currency}
+                                                onChange={(e) => {
+                                                    const newArr = [...addServices]
+                                                    newArr[index].currency = e.target.value;
+                                                    setAddServices(newArr)
+                                                }}
                                             >
                                                 {filterList.map((item, i) => {
                                                     return (
@@ -288,25 +280,38 @@ export default function Evaluation() {
 
                                 <td>
                                     <div className="field">
-                                        <input type="number"
+                                        <input type="number" value={addServices[index].venderService}
                                             onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-                                            onChange={(e) => addServices[index].currencyRate = e.target.value}
+                                            onChange={(e) => {
+                                                const newArr = [...addServices]
+                                                newArr[index].currencyRate = e.target.value;
+                                                setAddServices(newArr)
+                                            }}
                                         />
                                     </div>
                                 </td>
                                 <td>
                                     <div className="field">
-                                        <input type="number"
+                                        <input type="number" value={addServices[index].currencyAmount}
                                             onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-                                            onChange={(e) => addServices[index].currencyAmount = e.target.value}
+                                            onChange={(e) => {
+                                                const newArr = [...addServices]
+                                                newArr[index].currencyAmount = e.target.value;
+                                                setAddServices(newArr)
+                                            }}
                                         />
                                     </div>
                                 </td>
                                 <td>
                                     <div className="field">
-                                        <input type="number"
+                                        <input type="number" 
                                             onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-                                            onChange={(e) => addServices[index].profit = e.target.value}
+                                            value={addServices[index].profit}
+                                            onChange={(e) => {
+                                                const newArr = [...addServices]
+                                                newArr[index].profit = e.target.value;
+                                                setAddServices(newArr)
+                                            }}
                                         />
                                     </div>
                                 </td>
@@ -319,14 +324,7 @@ export default function Evaluation() {
                                     </div>
                                 </td>
                             </tr>
-                        ))} */}
-
-                        {
-                            formArray.map((item, index) => {
-                                <EvaluationLines formItem={item} key={index} />
-                            })
-                        }
-
+                        ))}
 
                     </tbody>
                 </table>
@@ -340,165 +338,4 @@ export default function Evaluation() {
         </div>
     </>
 
-}
-
-function EvaluationLines({ formItem }) {
-
-    const { removeSelf, handleSubmit, fields, values, key } = useFluentFormItem(
-        formItem
-    );
-
-    const filterList = [
-        {
-            value: 0,
-            name: 'All'
-        },
-        {
-            value: 1,
-            name: 'Active'
-        },
-        {
-            value: 2,
-            name: 'Deactive'
-        },
-    ]
-
-
-    return <>
-        <tr >
-            <td>
-                {/* <input {...fields.id} type="number" className='d-none' defaultValue={0} /> */}
-                <div className="field">
-                    <FormControl fullWidth>
-                        <Select {...fields.docType.select}
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                        >
-                            {filterList.map((item, i) => {
-                                return (
-                                    <MenuItem {...fields.docType.option(item.value)} key={i} value={item.value}>
-                                        <div key={i}>{item.name}</div>
-                                    </MenuItem>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
-                </div>
-            </td>
-            <td>
-                <div className="field">
-                    <FormControl fullWidth>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-
-
-                        >
-                            {filterList.map((item, i) => {
-                                return (
-                                    <MenuItem key={i} value={item.value}>
-                                        <div key={i}>{item.name}</div>
-                                    </MenuItem>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
-                </div>
-            </td>
-            <td>
-                <div className="field">
-
-                    <input type="number"
-                        onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-
-                    />
-                </div>
-            </td>
-            <td>
-                <div className="field">
-                    <input type="number"
-                        onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-
-                    />
-                </div>
-            </td>
-            <td>
-                <div className="field">
-                    <input type="number"
-                        onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-
-                    />
-                </div>
-            </td>
-            <td>
-                <div className="field">
-                    <input type="number"
-                        onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-
-                    />
-                </div>
-            </td>
-            <td>
-                <div className="field">
-                    <input type="number"
-                        onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-
-                    />
-                </div>
-            </td>
-            <td>
-                <div className="field">
-                    <FormControl fullWidth>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-
-
-                        >
-                            {filterList.map((item, i) => {
-                                return (
-                                    <MenuItem key={i} value={item.value}>
-                                        <div key={i}>{item.name}</div>
-                                    </MenuItem>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
-                </div>
-            </td>
-
-            <td>
-                <div className="field">
-                    <input type="number"
-                        onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-
-                    />
-                </div>
-            </td>
-            <td>
-                <div className="field">
-                    <input type="number"
-                        onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-
-                    />
-                </div>
-            </td>
-            <td>
-                <div className="field">
-                    <input type="number"
-                        onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
-
-                    />
-                </div>
-            </td>
-
-            <td>
-                <div className="field text-center">
-                    <svg onClick={removeSelf} style={{ color: 'red', cursor: 'pointer' }} xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                    </svg>
-                </div>
-            </td>
-        </tr>
-    </>
 }
