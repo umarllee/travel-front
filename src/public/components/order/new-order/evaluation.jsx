@@ -5,9 +5,10 @@ import { useState, useEffect } from 'react';
 import FormControl from '@mui/material/FormControl';
 import './new-order.scss'
 import { createFormArray, field, useFluentFormArray } from 'react-fluent-form';
+import { forwardRef, useImperativeHandle } from 'react';
 
-
-export default function Evaluation() {
+// export default function Evaluation() {
+export const Evaluation = forwardRef(function (props, ref) {
     const filterList = [
         {
             value: 0,
@@ -304,7 +305,7 @@ export default function Evaluation() {
                                 </td>
                                 <td>
                                     <div className="field">
-                                        <input type="number" 
+                                        <input type="number"
                                             onkeypress={(event) => { return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) }}
                                             value={addServices[index].profit}
                                             onChange={(e) => {
@@ -338,4 +339,4 @@ export default function Evaluation() {
         </div>
     </>
 
-}
+})

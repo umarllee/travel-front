@@ -30,7 +30,8 @@ import { useFluentFormItem } from 'react-fluent-form';
 import { createStore } from 'redux'
 import { Hotel } from './hotel';
 import { getNumberService } from '../../services/getNumber';
-import Evaluation from './evaluation';
+import { Evaluation } from './evaluation';
+
 
 function Order(props) {
 
@@ -125,7 +126,6 @@ function Order(props) {
     </>
 }
 
-
 function NewOrder() {
     const [value, setValueTabs] = useState(0);
     const [ticketData, setTicketData] = useState({});
@@ -138,6 +138,7 @@ function NewOrder() {
 
     const actionRef = useRef();
     const actionRefHotel = useRef();
+    const actionRefEvaluation = useRef();
 
     const handleChange = (event, newValue) => {
         console.log(newValue)
@@ -150,6 +151,7 @@ function NewOrder() {
 
         actionRef.current ? setTicketData(actionRef.current?.getData()) : setTicketData(ticketData);
         actionRefHotel.current ? setHotelData(actionRefHotel.current?.getData()) : setHotelData(hotelData);
+        actionRefEvaluation.current ? setHotelData(actionRefEvaluation.current?.getData()) : setHotelData(evaluationData);
 
 
         // setIsChangeTab(true)
@@ -191,7 +193,7 @@ function NewOrder() {
 
     const onHandleSave = () => {
 
-        getNumberService.getNumbers().then(data => console.log(data)).catch(err => console.log(err));
+        // getNumberService.getNumbers().then(data => console.log(data)).catch(err => console.log(err));
 
         let defHotelData = {
             bron: false,
@@ -220,6 +222,7 @@ function NewOrder() {
 
         console.log(actionRef.current?.getData());
         console.log(actionRefHotel.current?.getData());
+        console.log(actionRefEvaluation.current?.getData());
 
         // if (!isChangeTabTicket && !isChangeTabHotel && !isChangeTabEvaluation) {
         //     alert('ticket')
@@ -267,7 +270,7 @@ function NewOrder() {
                     <Hotel ref={actionRefHotel} />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={2}>
-                    <Evaluation />
+                    <Evaluation ref={actionRefEvaluation}/>
                 </CustomTabPanel>
             </Box>
 
